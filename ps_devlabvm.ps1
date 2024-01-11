@@ -7,15 +7,15 @@
 # Set-AzContext -Subscription $mySub
 
 $VMLocalAdminUser = "gzhou"
-$VMLocalAdminSecurePassword = ConvertTo-SecureString "1q2w3e$R%T^Y" -AsPlainText -Force
+$VMLocalAdminSecurePassword = ConvertTo-SecureString "1q2w3e%T^Y" -AsPlainText -Force
 $LocationName = "canadacentral"
-$ResourceGroupName = "gz-grp-2024-01-10-13-54-29"
-$ComputerName = "VM" + (Get-Date).ToString("yyMMddHHmmss")
+$ResourceGroupName = "gz-grp-2024-01-11-09-59-14"
+$ComputerName = "vm" + (Get-Date).ToString("yyMMddHHmmss")
 $VMName = $ComputerName
-$VMSize = "Standard_DS3"
+$VMSize = "Standard_DS1_v2"
 
 $VnetName = "vnet-02"
-$NICName = "NIC-" + $VMName
+$NICName = "nic-" + $VMName
 $SubnetName = "s1-vnet-02"
 #$SubnetAddressPrefix = "10.0.0.0/24"
 #$VnetAddressPrefix = "10.0.0.0/16"
@@ -33,6 +33,6 @@ $securityTypeStnd = "Standard"
 $VirtualMachine = New-AzVMConfig -VMName $VMName -VMSize $VMSize -SecurityType $securityTypeStnd
 $VirtualMachine = Set-AzVMOperatingSystem -VM $VirtualMachine -Windows -ComputerName $ComputerName -Credential $Credential -ProvisionVMAgent -EnableAutoUpdate
 $VirtualMachine = Add-AzVMNetworkInterface -VM $VirtualMachine -Id $NIC.Id
-$VirtualMachine = Set-AzVMSourceImage -VM $VirtualMachine -PublisherName 'MicrosoftWindowsServer' -Offer 'WindowsServer' -Skus '2022-datacenter-azure-edition-core' -Version latest
+$VirtualMachine = Set-AzVMSourceImage -VM $VirtualMachine -PublisherName 'MicrosoftWindowsServer' -Offer 'WindowsServer' -Skus '2019-datacenter-gensecond' -Version latest
 
 New-AzVM -ResourceGroupName $ResourceGroupName -Location $LocationName -VM $VirtualMachine -Verbose
