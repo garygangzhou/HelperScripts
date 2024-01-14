@@ -9,14 +9,14 @@
 $VMLocalAdminUser = "gzhou"
 $VMLocalAdminSecurePassword = ConvertTo-SecureString "1q2w3e%T^Y" -AsPlainText -Force
 $LocationName = "canadacentral"
-$ResourceGroupName = "gz-grp-2024-01-11-09-59-14"
+$ResourceGroupName = "gz-grp-2024-01-14-10-41-07"
 $ComputerName = "vm" + (Get-Date).ToString("yyMMddHHmmss")
 $VMName = $ComputerName
 $VMSize = "Standard_DS1_v2"
 
-$VnetName = "vnet-02"
+$VnetName = "vnet-01"
 $NICName = "nic-" + $VMName
-$SubnetName = "s1-vnet-02"
+$SubnetName = "s1-vnet-01"
 #$SubnetAddressPrefix = "10.0.0.0/24"
 #$VnetAddressPrefix = "10.0.0.0/16"
 
@@ -34,5 +34,6 @@ $VirtualMachine = New-AzVMConfig -VMName $VMName -VMSize $VMSize -SecurityType $
 $VirtualMachine = Set-AzVMOperatingSystem -VM $VirtualMachine -Windows -ComputerName $ComputerName -Credential $Credential -ProvisionVMAgent -EnableAutoUpdate
 $VirtualMachine = Add-AzVMNetworkInterface -VM $VirtualMachine -Id $NIC.Id
 $VirtualMachine = Set-AzVMSourceImage -VM $VirtualMachine -PublisherName 'MicrosoftWindowsServer' -Offer 'WindowsServer' -Skus '2019-datacenter-gensecond' -Version latest
+$VirtualMachine = Set-AzVMBootDiagnostic -VM $VirtualMachine -Disable
 
 New-AzVM -ResourceGroupName $ResourceGroupName -Location $LocationName -VM $VirtualMachine -Verbose
