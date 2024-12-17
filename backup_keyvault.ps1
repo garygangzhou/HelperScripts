@@ -5,7 +5,7 @@ $sub_name = "Visual Studio Enterprise Subscription - Gary Zhou"
 $kv_name = "gz-kv-trail-000001"
 
 $storageAccountName = "gztrailstorageacct00001"
-$sasToken = "sv=2022-11-02&ss=b&srt=sco&sp=rwdlactfx&se=2025-12-13T02:28:08Z&st=2024-12-12T18:28:08Z&spr=https&sig=QCmJoPsAYVaUy5PwrHsupz6LgY%2FQv0FTVep4b57BGBI%3D"
+$sasToken = "sastoken from storage account"
 
 $bk_base_path = "C:\temp\keyVaultbackup"
 
